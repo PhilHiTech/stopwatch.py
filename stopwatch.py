@@ -69,10 +69,10 @@ class Stopwatch:
     def __str__(self) -> str:
         time = self.duration
 
-        if time >= 1:
+        if time >= 1.0:
             return "{:.{}f}s".format(time, self.digits)
 
-        if time >= 0.01:
+        elif time >= 0.01:
             return "{:.{}f}ms".format(time * 1000, self.digits)
 
         return "{:.{}f}μs".format(time * 1000 * 1000, self.digits)
