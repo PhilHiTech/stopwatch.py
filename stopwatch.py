@@ -27,7 +27,7 @@ __author__ = "Ravener"
 __version__ = "2.0.1"
 __license__ = "MIT"
 
-import time
+import time.monotonic
 
 
 class Stopwatch:
@@ -36,13 +36,13 @@ class Stopwatch:
     def __init__(self, digits: int = 2):
         self.digits = digits
 
-        self._start = time.perf_counter()
+        self._start = time.monotonic()
         self._end = None
 
     @property
     def duration(self) -> float:
         return (
-            self._end - self._start if self._end else time.perf_counter() - self._start
+            self._end - self._start if self._end else time.monotonic() - self._start
         )
 
     @property
@@ -50,21 +50,21 @@ class Stopwatch:
         return not self._end
 
     def restart(self) -> None:
-        self._start = time.perf_counter()
+        self._start = time.monotonic()
         self._end = None
 
     def reset(self) -> None:
-        self._start = time.perf_counter()
+        self._start = time.monotonic()
         self._end = self._start
 
     def start(self) -> None:
         if not self.running:
-            self._start = time.perf_counter() - self.duration
+            self._start = time.monotonic() - self.duration
             self._end = None
 
     def stop(self) -> None:
         if self.running:
-            self._end = time.perf_counter()
+            self._end = time.monotonic()
 
     def __str__(self) -> str:
         time = self.duration
