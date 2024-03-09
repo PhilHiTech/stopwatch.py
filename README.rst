@@ -8,7 +8,7 @@ Requires Python 3.5+
 
 .. code:: sh
 
-   pip install stopwatch.py
+   pip install git+https://github.com/PhilHiTech/stopwatch.py.git
 
 Usage
 -----
