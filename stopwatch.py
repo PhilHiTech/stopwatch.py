@@ -41,11 +41,11 @@ class Stopwatch:
 
     @property
     def duration(self) -> float:
-		if self._end:
-			duration = self._end - self._start
-		else:
-			duration = time_monotonic() - self._start
-		return round(duration, self.digits)
+        if self._end:
+            duration = self._end - self._start
+        else:
+            duration = time_monotonic() - self._start
+        return round(duration, self.digits)
 
     @property
     def running(self) -> bool:
