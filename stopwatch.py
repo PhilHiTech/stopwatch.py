@@ -42,18 +42,16 @@ class Stopwatch:
     @property
     def duration_rounded(self) -> float:
         if self._end:
-            duration_rounded = self._end - self._start
-        else:
-            duration_rounded = time_monotonic() - self._start
-        return round(duration_rounded, self.digits)
-
-    @property
-    def duration(self) -> float:
-        if self._end:
             duration = self._end - self._start
         else:
             duration = time_monotonic() - self._start
         return round(duration, self.digits)
+
+    @property
+    def duration(self) -> float:
+        return (
+            self._end - self._start if self._end else time_monotonic() - self._start
+        )
 
     @property
     def running(self) -> bool:
@@ -77,12 +75,12 @@ class Stopwatch:
             self._end = time_monotonic()
 
     def __str__(self) -> str:
-        time = self.duration
+        time_duration = self.duration
 
-        if time >= 1.0:
-            return "{:.{}f}s".format(time, self.digits)
+        if time_duration >= 1.0:
+            return "{:.{}f}s".format(time_duration, self.digits)
 
-        elif time >= 0.01:
-            return "{:.{}f}ms".format(time * 1000, self.digits)
+        elif time_duration >= 0.01:
+            return "{:.{}f}ms".format(time_duration * 1000, self.digits)
 
-        return "{:.{}f}μs".format(time * 1000 * 1000, self.digits)
+        return "{:.{}f}μs".format(time_duration * 1000 * 1000, self.digits)
