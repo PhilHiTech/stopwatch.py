@@ -40,6 +40,14 @@ class Stopwatch:
         self._end = None
 
     @property
+    def duration_rounded(self) -> float:
+        if self._end:
+            duration_rounded = self._end - self._start
+        else:
+            duration_rounded = time_monotonic() - self._start
+        return round(duration_rounded, self.digits)
+
+    @property
     def duration(self) -> float:
         if self._end:
             duration = self._end - self._start
