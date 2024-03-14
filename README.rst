@@ -29,6 +29,7 @@ Usage
     stopwatch.restart() # Reset and start again
     stopwatch.running # Whether stopwatch is running
     stopwatch.duration # Get the duration (in seconds)
+    stopwatch.duration_rounded # Get the duration (in seconds) rounded to Stopwatch(n) digits
     str(stopwatch) # Get a friendly duration string
 
 License
