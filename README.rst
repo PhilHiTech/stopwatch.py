@@ -20,7 +20,7 @@ Usage
     # e.g 2 digits = 1.00, 3 digits = 1.000
     # Optional, defaults to 2
     stopwatch = Stopwatch(2) # Start a stopwatch
-    # It's just math with time.monotonic() so there isn't really a task
+    # It's just math with time.perf_counter_ns() so there isn't really a task
     # running in background
 
     stopwatch.stop() # Stop stopwatch, time freezes
