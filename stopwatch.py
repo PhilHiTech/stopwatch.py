@@ -27,8 +27,7 @@ __author__ = "Ravener"
 __version__ = "2.0.1"
 __license__ = "MIT"
 
-from time import monotonic as time_monotonic
-
+from time import perf_counter_ns as time_perf_counter_ns # 10^-9 seconds
 
 class Stopwatch:
     digits: int
@@ -36,7 +35,7 @@ class Stopwatch:
     def __init__(self, digits: int = 2):
         self.digits = digits
 
-        self._start = time_monotonic()
+        self._start = time_perf_counter_ns()
         self._end = None
 
     @property
@@ -44,13 +43,13 @@ class Stopwatch:
         if self._end:
             duration = self._end - self._start
         else:
-            duration = time_monotonic() - self._start
-        return round(duration, self.digits)
+            duration = time_perf_counter_ns() - self._start
+        return round(duration / 1e9, self.digits)
 
     @property
-    def duration(self) -> float:
+    def duration(self) -> int:
         return (
-            self._end - self._start if self._end else time_monotonic() - self._start
+            self._end - self._start if self._end else time_perf_counter_ns() - self._start
         )
 
     @property
@@ -58,29 +57,29 @@ class Stopwatch:
         return not self._end
 
     def restart(self) -> None:
-        self._start = time_monotonic()
+        self._start = time_perf_counter_ns()
         self._end = None
 
     def reset(self) -> None:
-        self._start = time_monotonic()
+        self._start = time_perf_counter_ns()
         self._end = self._start
 
     def start(self) -> None:
         if not self.running:
-            self._start = time_monotonic() - self.duration
+            self._start = time_perf_counter_ns() - self.duration
             self._end = None
 
     def stop(self) -> None:
         if self.running:
-            self._end = time_monotonic()
+            self._end = time_perf_counter_ns()
 
     def __str__(self) -> str:
         time_duration = self.duration
 
-        if time_duration >= 1.0:
-            return "{:.{}f}s".format(time_duration, self.digits)
+        if time_duration >= 1e9:
+            return "{:.{}f}s".format(round(time_duration / 1e9, self.digits), self.digits)
 
-        elif time_duration >= 0.01:
-            return "{:.{}f}ms".format(time_duration * 1000, self.digits)
+        elif time_duration >= 1e7:
+            return "{:.{}f}ms".format(round(time_duration / 1e6, self.digits), self.digits)
 
-        return "{:.{}f}μs".format(time_duration * 1000 * 1000, self.digits)
+        return "{:.{}f}μs".format(round(time_duration / 1e3, self.digits), self.digits)
