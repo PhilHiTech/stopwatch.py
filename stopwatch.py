@@ -39,7 +39,7 @@ class Stopwatch:
         self._end = None
 
     @property
-    def duration_rounded(self) -> float:
+    def duration_rounded(self) -> str:
         if self._end:
             duration = self._end - self._start
         else:
