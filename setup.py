@@ -12,7 +12,7 @@ setup(
     description=description,
     long_description=long_description,
     long_description_content_type="text/x-rst",
-    url="https://github.com/PhilHiTech/stopwatch.py",
+    url="https://github.com/ravener/stopwatch.py",
     author=stopwatch.__author__,
     author_email="ravener.anime@gmail.com",
     license=stopwatch.__license__,
