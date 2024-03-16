@@ -23,8 +23,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-__author__ = "Ravener"
-__version__ = "2.0.1"
+__author__ = "Ravener" # version edited by PhilHiTech
+__version__ = "2.0.2"
 __license__ = "MIT"
 
 from time import perf_counter_ns as time_perf_counter_ns # 10^-9 seconds
@@ -39,7 +39,7 @@ class Stopwatch:
         self._end = None
 
     @property
-    def duration_rounded(self) -> str:
+    def duration_str_secs(self) -> str:
         if self._end:
             duration = self._end - self._start
         else:
